@@ -1,0 +1,27 @@
+x-frontend: &frontend
+  build:
+    context: ./frontend
+  ports:
+    - "80:80"
+
+services:
+  frontend-dev:
+    <<: *frontend
+    build:
+      context: ./frontend
+      target: development
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    profiles:
+      - dev
+
+  frontend-prod:
+    <<: *frontend
+    build:
+      context: ./frontend
+      target: production
+    profiles:
+      - prod
