@@ -1,7 +1,7 @@
 # ── base: shared dependency install ──────────────────────────────────────────
 FROM node:24-alpine AS base
 WORKDIR /app
-RUN chown node:node /app
+RUN npm install -g npm@11.6.2 && chown node:node /app
 USER node
 COPY --chown=node:node package.json package-lock.json ./
 RUN npm ci --ignore-scripts
